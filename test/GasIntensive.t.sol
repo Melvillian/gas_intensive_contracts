@@ -11,7 +11,21 @@ contract GasIntensiveTest is Test {
         reader = new GasIntensive();
     }
 
-    function test_call() public {
-        reader.intensiveRead();
+    function test_call() public view {
+        reader.intensiveRead(); // this results in 49867510 gas used
     }
+
+    function test_storageRead() public view {
+        reader.intensiveStorageRead(52_50); // this results in 48403025 gas used
+    }
+
+    function test_storageWrite() public {
+        reader.intensiveStorageWrite(2_200); // this results in 48711386 gas used
+    }
+
+    function test_storedValue_read() public {
+        reader.storedValue(); // this results in 7562 gas used
+    }
+
+    
 }
